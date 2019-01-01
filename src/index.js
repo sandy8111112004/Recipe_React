@@ -21,23 +21,47 @@ const DirectoryView = (props)=>(
 const SearchForm = (props)=>(
     <div>
         <form>
-            <input value ={props.value} onChange={props.changeHandler}></input>
-            <button onClick={props.searchHandler}>Search</button>
+            <input id='searchInput' value ={props.value} onChange={props.changeHandler}></input>
+            <button onClick={props.searchHandler} id='searchBtn'>SEARCH</button>
         </form>
     </div>
 )
 
 const RecipeCard = (props)=>(
-    <div>
+    <div className="entry">
         <p onClick={props.recipeSelector}>{props.name}</p>
     </div>
 )
 
 const DetailedRecipe = (props) =>(
     <div>
-        <p>name: {props.name}</p>
-        <p>ingredients: {props.ingredients}</p>
-        <p>instructions: {props.instructions} </p>
+        <h1><i class="fas fa-utensils foodIcon"></i>  {props.name}</h1>
+        <br/>
+        <br/>
+        <Grid width='10vw' gap={0}>
+            <div>
+                <h4><b>INGREDIENTS:</b></h4>
+                <br/>
+                {props.ingredients.map((e,i)=> <DetailedIngredient element={e} key={i} />)}
+            </div>
+            <div>
+                <h4><b>INSTRUCTIONS:</b></h4>
+                <br/>
+                {props.instructions.map((e,i)=> <DetailedInstruction element={e} key={i}  />)}
+            </div>
+        </Grid>
+    </div>
+)
+
+const DetailedIngredient = (props) =>(
+    <div>
+        <p>{props.element}</p>
+    </div>
+)
+
+const DetailedInstruction = (props) => (
+    <div>
+        <p>{props.element}</p>
     </div>
 )
 
@@ -52,33 +76,33 @@ class App extends React.Component {
         Recipes:[
             {
             id: 1,
-            name: 'turkey + stuff',
-            ingredients: ['turkey', 'mustard', 'greens', 'celery', 'potato'],
-            instructions: ['pre-heat over to 350', 'tickle the turkey', 'cut some celery']
+            name: 'TURKEY + STUFF',
+            ingredients: ['Turkey', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the turkey', 'Cut some celery']
           },
           {
             id: 2,
-            name: 'chicken + stuff',
-            ingredients: ['chicken', 'mustard', 'greens', 'celery', 'potato'],
-            instructions: ['pre-heat over to 350', 'tickle the chicken', 'cut some celery']
+            name: 'CHICKEN + STUFF',
+            ingredients: ['Chicken', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the chicken', 'Cut some celery']
           },
           {
             id: 3,
-            name: 'beef + stuff',
-            ingredients: ['beef', 'mustard', 'greens', 'celery', 'potato'],
-            instructions: ['pre-heat over to 350', 'tickle the beef', 'cut some celery']
+            name: 'BEEF + STUFF',
+            ingredients: ['Beef', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the beef', 'Cut some celery']
           },
           {
             id: 4,
-            name: 'pork + stuff',
-            ingredients: ['pork', 'mustard', 'greens', 'celery', 'potato'],
-            instructions: ['pre-heat over to 350', 'tickle the pork', 'cut some celery']
+            name: 'PPORK + STUFF',
+            ingredients: ['Pork', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the pork', 'Cut some celery']
           },
           {
             id: 5,
-            name: 'fish + stuff',
-            ingredients: ['fish', 'mustard', 'greens', 'celery', 'potato'],
-            instructions: ['pre-heat over to 350', 'tickle the fish', 'cut some celery']
+            name: 'FISH + STUFF',
+            ingredients: ['Fish', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the fish', 'Cut some celery']
           }
         ],
         input:'',

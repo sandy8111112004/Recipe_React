@@ -18,15 +18,40 @@ body {
 h2{
   font-size: 32px;
 }
-
+h1{
+  font-size: 40px;
+  font-weight: 700;
+}
+h4{
+  font-size: 20px;
+}
 p{
   font-size:20px;
   margin: 2px;
+}
+b{
+  font-weight: 700;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+#searchBtn {
+  background-color: aquamarine;
+  color: white; 
+  border: 2px solid aquamarine;
+  border-radius: 5px;
+  background:aquamarine;
+  box-shadow:2px 2px 3px 1px #B2BABB;
+  height: 1.5em;
+}
+#searchInput {
+  border: 2px solid #B2BABB;
+  border-radius: 5px;
+  padding:2px;
+  margin-right: 5px;
+  width: 35vw;
 }
 
 #title-style {
@@ -36,9 +61,22 @@ code {
   padding: 5px;
   border: 2px solid #B2BABB;
 }
+.foodIcon{
+  border: 5px solid aquamarine;
+  padding:15px;
+  border-radius: 50px;
+  background: aquamarine;
+}
 
 .box {
   border: 2px solid #B2BABB;
   padding: 5px;
   height:80vh;
+}
+.entry{
+  height:2em;
+  width: 98%;
+  border: 2px solid #B2BABB;
+  margin-top: 5px;
+  border-radius: 5px;
 }
