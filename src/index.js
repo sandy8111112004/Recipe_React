@@ -67,7 +67,7 @@ const DetailedInstruction = (props) => (
 
 const PageTitle = (props) => (
     <div>
-        <h2 id='title-style'>RecepiApp</h2>
+        <h2 id='title-style'><i class="fas fa-utensils titleIcon"></i> RecipeApp</h2>
     </div>
 )
 
@@ -106,7 +106,38 @@ class App extends React.Component {
           }
         ],
         input:'',
-        selected:[],
+        selected:[
+            {
+            id: 1,
+            name: 'TURKEY + STUFF',
+            ingredients: ['Turkey', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the turkey', 'Cut some celery']
+          },
+          {
+            id: 2,
+            name: 'CHICKEN + STUFF',
+            ingredients: ['Chicken', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the chicken', 'Cut some celery']
+          },
+          {
+            id: 3,
+            name: 'BEEF + STUFF',
+            ingredients: ['Beef', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the beef', 'Cut some celery']
+          },
+          {
+            id: 4,
+            name: 'PPORK + STUFF',
+            ingredients: ['Pork', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the pork', 'Cut some celery']
+          },
+          {
+            id: 5,
+            name: 'FISH + STUFF',
+            ingredients: ['Fish', 'Mustard', 'Greens', 'Celery', 'Potato'],
+            instructions: ['Pre-heat over to 350', 'Tickle the fish', 'Cut some celery']
+          }
+        ],
     }
 
     handleChange = (e) =>{
@@ -116,8 +147,8 @@ class App extends React.Component {
 
     handleSearch = (event) => {
         event.preventDefault();
-        const RecipeFiltered = this.state.Recipes.filter(e => e.name.indexOf(this.state.input) !== -1 );
-        this.setState({ Recipes: RecipeFiltered });
+        const RecipeFiltered = this.state.Recipes.filter(e => e.name.indexOf(this.state.input.toUpperCase()) !== -1 );
+        this.setState({ selected: RecipeFiltered });
     }
 
     // selectRecipes = (e) =>{
@@ -134,7 +165,7 @@ class App extends React.Component {
                 <Grid width='47vw' gap={0}>
                     <div className="box">
                     <DirectoryView 
-                        allRecipe = {this.state.Recipes}
+                        allRecipe = {this.state.selected}
                         handleChange = {this.handleChange}
                         handleSearch = {this.handleSearch}
                         //selectRecipes = {this.selectRecipes}
@@ -143,9 +174,9 @@ class App extends React.Component {
                     </div>
                     <div className="box">
                     <DetailedRecipe 
-                        name = { this.state.Recipes[0].name}
-                        ingredients = {this.state.Recipes[0].ingredients}
-                        instructions = {this.state.Recipes[0].instructions}
+                        name = { this.state.selected[0].name}
+                        ingredients = {this.state.selected[0].ingredients}
+                        instructions = {this.state.selected[0].instructions}
                     />
                     </div>
                 </Grid>

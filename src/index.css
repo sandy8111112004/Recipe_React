@@ -61,6 +61,12 @@ code {
   padding: 5px;
   border: 2px solid #B2BABB;
 }
+.titleIcon{
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 40px;
+}
+
 .foodIcon{
   border: 5px solid aquamarine;
   padding:15px;
