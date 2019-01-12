@@ -85,4 +85,6 @@ code {
   border: 2px solid #B2BABB;
   margin-top: 5px;
   border-radius: 5px;
+  background: white;
+  text-align: left;
 }

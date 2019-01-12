@@ -12,9 +12,9 @@ const DirectoryView = (props)=>(
         changeHandler={props.handleChange} 
         value={props.value} 
         searchHandler={props.handleSearch}
-        //RecipeSelector = {props.selectRecipes}
         />
-        {props.allRecipe.map((e,i)=> <RecipeCard name={e.name}  key={i}/>)}
+        <br/>
+        {props.allRecipe.map((e,i)=> <RecipeCard name={e.name} id={e.id} RecipeSelector = {props.selectRecipes}  key={i}/>)}
     </div>
 )
 
@@ -28,26 +28,26 @@ const SearchForm = (props)=>(
 )
 
 const RecipeCard = (props)=>(
-    <div className="entry">
-        <p onClick={props.recipeSelector}>{props.name}</p>
+    <div >
+        <button className='entry' onClick={()=>props.RecipeSelector(props.id)}>{props.name}</button>
     </div>
 )
 
 const DetailedRecipe = (props) =>(
     <div>
-        <h1><i class="fas fa-utensils foodIcon"></i>  {props.name}</h1>
+        <h1><i className="fas fa-utensils foodIcon"></i>  {props.displayEntry.name?props.displayEntry.name:'Please Select A Recipe'}</h1>
         <br/>
         <br/>
         <Grid width='10vw' gap={0}>
             <div>
                 <h4><b>INGREDIENTS:</b></h4>
                 <br/>
-                {props.ingredients.map((e,i)=> <DetailedIngredient element={e} key={i} />)}
+                {props.displayEntry.ingredients?props.displayEntry.ingredients.map((e,i)=> <DetailedIngredient element={e} key={i} />):'Secret Ingredients!'}
             </div>
             <div>
                 <h4><b>INSTRUCTIONS:</b></h4>
                 <br/>
-                {props.instructions.map((e,i)=> <DetailedInstruction element={e} key={i}  />)}
+                {props.displayEntry.instructions?props.displayEntry.instructions.map((e,i)=> <DetailedInstruction element={e} key={i}  />):'Secret Instruction!'}
             </div>
         </Grid>
     </div>
@@ -67,7 +67,7 @@ const DetailedInstruction = (props) => (
 
 const PageTitle = (props) => (
     <div>
-        <h2 id='title-style'><i class="fas fa-utensils titleIcon"></i> RecipeApp</h2>
+        <h2 id='title-style'><i className="fas fa-utensils titleIcon"></i> RecipeApp</h2>
     </div>
 )
 
@@ -138,6 +138,7 @@ class App extends React.Component {
             instructions: ['Pre-heat over to 350', 'Tickle the fish', 'Cut some celery']
           }
         ],
+        displayEntry: {},
     }
 
     handleChange = (e) =>{
@@ -149,14 +150,14 @@ class App extends React.Component {
         event.preventDefault();
         const RecipeFiltered = this.state.Recipes.filter(e => e.name.indexOf(this.state.input.toUpperCase()) !== -1 );
         this.setState({ selected: RecipeFiltered });
+        this.setState({displayEntry: RecipeFiltered[0]});
     }
 
-    // selectRecipes = (e) =>{
-    //     e.preventDefault();
-    //     const RecipeFiltered = this.state.Recipes.filter(e => e.name.indexOf(this.state.input) !== -1 );
-    //     this.setState({ selected: RecipeFiltered });
+    selectRecipes = (id) =>{
+        this.setState({ displayEntry: [] });
+        this.setState({ displayEntry: this.state.Recipes.find(e=>e.id===id) });
 
-    // }
+    }
 
     render() {
         return (
@@ -168,15 +169,13 @@ class App extends React.Component {
                         allRecipe = {this.state.selected}
                         handleChange = {this.handleChange}
                         handleSearch = {this.handleSearch}
-                        //selectRecipes = {this.selectRecipes}
+                        selectRecipes = {this.selectRecipes}
                         value={this.state.input}
                     />
                     </div>
                     <div className="box">
                     <DetailedRecipe 
-                        name = { this.state.selected[0].name}
-                        ingredients = {this.state.selected[0].ingredients}
-                        instructions = {this.state.selected[0].instructions}
+                        displayEntry = {this.state.displayEntry}
                     />
                     </div>
                 </Grid>
